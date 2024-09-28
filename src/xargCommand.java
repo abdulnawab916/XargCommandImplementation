@@ -83,6 +83,7 @@ public class xargCommand {
                     cat: Reads a file and prints it to the standard output.
                     man: A command that can be found in most Unix tutorials.
               */
+
                 // The path for accessing the bin variables
                 String[] envp = {"PATH=/bin:/usr/bin"}; //gives us native sys calls
                 Process process1 = Runtime.getRuntime().exec(arrayOfTokens, envp);
