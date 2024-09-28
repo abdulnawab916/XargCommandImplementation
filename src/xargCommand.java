@@ -97,6 +97,7 @@ public class xargCommand {
                 // While the input has stuff, then we print it out.
                 while ((s = stdInput.readLine()) != null) {
                     System.out.println(s);
+                    // fixing github
                 }
             }
             // these params for catch might be able to catch the error
