@@ -5,6 +5,11 @@
 // Java program to demonstrate
 // Java Runtime exec() method
 
+
+import java.io.*;
+import java.nio.file.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +24,7 @@ import java.util.Scanner;  // Import the Scanner class
 
 public class xargCommand {
         public static void main(String[] args) {
+            // Tip: I might be able to put all of this into a seperate func.
             ArrayList<String> tokens = new ArrayList<String>();
             // declare std in
             Scanner stdin = new Scanner(System.in);
@@ -65,6 +71,9 @@ public class xargCommand {
             {
                 System.out.println(value);
             }
+
+
+
             // Print some characters
             System.out.println("******\n");
             // CommandTwo declaration
@@ -81,8 +90,21 @@ public class xargCommand {
             // try catch for exception if sys call does not work
             try {
                 // The path for accessing the bin variables
-                String[] envp = {"PATH=/bin:/usr/bin"}; //gives us native sys calls
-                Process process1 = Runtime.getRuntime().exec(arrayOfTokens, envp);
+                  String[] envp = {"PATH=/bin:/usr/bin"}; //gives us native sys calls
+//                Process process1 = Runtime.getRuntime().exec(arrayOfTokens, envp);
+
+                Process commandOneProcess = Runtime.getRuntime.exec(commandOne, envp);
+
+                // Getting output of the left-hand side of the token
+                BufferedReader stdInputCommandOne = new BufferedReader(new InputStreamReader(commandOneProcess.getInputStream()));
+                // grab potential error of comamnd one process as well
+                BufferedReader stdErrorCommandOne = new BufferedReader(new InputStreamReader(commandOneProcess.getErrorStream()));
+
+                String command1;
+                while ((command1 = stdInputCommandOne.readLine()) != null) {
+                    System.out.println(command1); // should print out command1, the comamnd prior to the pipe
+                }
+
 
                 // Grabbing the output process so that we can print it out
                 BufferedReader stdInput = new BufferedReader(new InputStreamReader(process1.getInputStream()));
