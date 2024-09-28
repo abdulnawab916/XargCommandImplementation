@@ -1,6 +1,14 @@
 // Implementing the 'xarg' command.
 
 // Packages being imported.
+// Imports (New)
+// Java program to demonstrate
+// Java Runtime exec() method
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;  // Import the Scanner class
 
@@ -22,18 +30,53 @@ public class xargCommand {
                 System.exit(0);
             }
 
-            // after error handling, then create the token array
+            // Handle the case for 'exit' command
+            // Gets rid of the shell
+            if (command.equalsIgnoreCase("exit")){
+                System.out.println("Exiting xargCommandShell...");
+                System.exit(0);
+            }
+
+            // after error handling, and if user wants to exit,
+            // then create the token array
             // Creating an array of tokens.
             String[] arrayOfTokens = command.split(" ");
 
-            // Then split up the String into tokens, each component will be a value in the array.
-            for (String index : arrayOfTokens) {
-                System.out.println(index);
+            // try catch for exception if sys call does not work
 
+            try {
+                // The ENVP Variable gives us to basic Unix/Linux commands such as...
+                /*
+                    ls: Lists files and their contents. You can use subcommands like ls -r to reverse the order in which files are displayed.
+                    rm: Removes files, directories, symbolic links, device nodes, pipes, and sockets.
+                    mkdir: Creates a new directory.
+                    cd: Changes the current directory.
+                    grep: Searches for a word or pattern within a file.
+                    cp: Copies files. You can use it to copy files from one directory to another, from your default directory, or from other devices.
+                    chmod: Changes file system access permissions.
+                    cat: Reads a file and prints it to the standard output.
+                    man: A command that can be found in most Unix tutorials.
+              */
+                String[] envp = {"PATH=/bin:/usr/bin"}; //gives us native sys calls
+                Process process1 = Runtime.getRuntime().exec(arrayOfTokens, envp);
+
+                // Grabbing the output process so that we can print it out
+                BufferedReader stdInput = new BufferedReader(new InputStreamReader(process1.getInputStream()));
+                // Allows us to grab the error if there is one
+                BufferedReader stdError = new BufferedReader(new InputStreamReader(process1.getErrorStream()));
+                String s;
+
+                // While the input has stuff, then we print it out.
+                while ((s = stdInput.readLine()) != null) {
+                    System.out.println(s);
+                }
             }
-
-
-    }
+            // these params for catch might be able to catch the error
+            // change to 'Exception e' if need be
+            catch (Exception e){
+                System.err.println(e.getMessage()); // getMessage prints it
+           }
+        }
 }
 
 /*
@@ -42,8 +85,18 @@ https://www.w3schools.com/java/java_user_input.asp - Using the Scanner Package
 https://www.educative.io/answers/what-is-scannernextline-in-java - using .nextLine
 https://www.w3schools.com/java/java_arraylist.asp - how to use array list
 https://sentry.io/answers/how-to-split-a-string-in-java/ - splitting a string
-
+https://www.geeksforgeeks.org/java-runtime-exec-method/ - using java sys calls, Java runtime
+https://www.google.com/search?q=How+to+print+out+an+error+in+a+try+catch+in+java&oq=How+to+print+out+an+error+
+in+a+try+catch+in+java&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORigATIHCAEQIRigATIHCAIQIRigATIHCAMQIRigAdIBCTk3NTZqMWoxNagCCLACAQ&
+sourceid=chrome&ie=UTF-8:w
+Use of ChatGPT 4o to help with Syntax.
 Issues/Things Learned:
 - Gotta use object name to access the methods in the Scanner type.
+
+- When you run a process, you need to get the output from the process into a buffer type of thing
+    and then you display it like that.
+    - This basically gets the stdINput and then reads it into a buffer by allocating space for the buffer and then
+    - reading it in.
+      'BufferedReader stdInput = new BufferedReader(new InputStreamReader(process1.getInputStream()))'
 - Line 13
 */
