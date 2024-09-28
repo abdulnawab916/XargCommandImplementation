@@ -12,6 +12,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;  // Import the Scanner class
 
+// For piping, add error handling for when the user does not enter a space between pipes
+// Example:
+// ls Desktop| sdsfdsfdsf
+// This will not parse correctly, add error handling for this
+
 public class xargCommand {
         public static void main(String[] args) {
             ArrayList<String> tokens = new ArrayList<String>();
@@ -36,54 +41,45 @@ public class xargCommand {
                 System.out.println("Exiting xargCommandShell...");
                 System.exit(0);
             }
-
             // after error handling, and if user wants to exit,
             // then create the token array
             // Creating an array of tokens.
             String[] arrayOfTokens = command.split(" ");
-
             // Summary of what I did and what I should do:
-
-
-
-
 
             // decalre array to store first command
             ArrayList<String> commandOne = new ArrayList<String>();
+
             // counter variable for seeing which index we are on
             int counter = 0;
+
            // keep reading a string and executing the commands until I hit a pipe
             while (counter < arrayOfTokens.length && !("|".equals(arrayOfTokens[counter]))) {
                 commandOne.add(arrayOfTokens[counter]);
                 counter++;
             }
-
-
-            // Defining the func. to handle piping
-            public static void pipeHandler() {
-
-
-
-
-
+            // Run the processes of whatever is in the first command
+            // and then
+            // for each string value in the first command
+            for (String value: commandOne)
+            {
+                System.out.println(value);
             }
+            // Print some characters
+            System.out.println("******\n");
+            // CommandTwo declaration
+            ArrayList<String> commandTwo = new ArrayList<String>();
+            // Then print whatever is the 2nd command
+            //while (counter < arrayOfTokens.length && !("|".equals(arrayOfTokens[counter]))) {
+            while (int middleOfCommand = startIndex; middleOfCommand < arrayOfTokens.length; middleOfCommand++)
+            {
+                commandTwo.add(arrayOfTokens[middleOfCommand]);
+            }
+            // insert pipe handler here. First, I want to check that my
+            // piping parsing is working correctly
 
             // try catch for exception if sys call does not work
-
             try {
-                // The ENVP Variable gives us to basic Unix/Linux commands such as...
-                /*
-                    ls: Lists files and their contents. You can use subcommands like ls -r to reverse the order in which files are displayed.
-                    rm: Removes files, directories, symbolic links, device nodes, pipes, and sockets.
-                    mkdir: Creates a new directory.
-                    cd: Changes the current directory.
-                    grep: Searches for a word or pattern within a file.
-                    cp: Copies files. You can use it to copy files from one directory to another, from your default directory, or from other devices.
-                    chmod: Changes file system access permissions.
-                    cat: Reads a file and prints it to the standard output.
-                    man: A command that can be found in most Unix tutorials.
-              */
-
                 // The path for accessing the bin variables
                 String[] envp = {"PATH=/bin:/usr/bin"}; //gives us native sys calls
                 Process process1 = Runtime.getRuntime().exec(arrayOfTokens, envp);
@@ -93,7 +89,6 @@ public class xargCommand {
                 // Allows us to grab the error if there is one
                 BufferedReader stdError = new BufferedReader(new InputStreamReader(process1.getErrorStream()));
                 String s;
-
                 // While the input has stuff, then we print it out.
                 while ((s = stdInput.readLine()) != null) {
                     System.out.println(s);
@@ -131,5 +126,17 @@ Issues/Things Learned:
 - Error was cause of some null pointer type.
 - while the pipe is not a thing
   while (counter < arrayOfTokens.length && !("|".equals(arrayOfTokens[counter]))) {
-
+                // The ENVP Variable gives us to basic Unix/Linux commands such as...
+                /*
+                    ls: Lists files and their contents. You can use subcommands like ls -r to reverse the order in which files are displayed.
+                    rm: Removes files, directories, symbolic links, device nodes, pipes, and sockets.
+                    mkdir: Creates a new directory.
+                    cd: Changes the current directory.
+                    grep: Searches for a word or pattern within a file.
+                    cp: Copies files. You can use it to copy files from one directory to another, from your default directory, or from other devices.
+                    chmod: Changes file system access permissions.
+                    cat: Reads a file and prints it to the standard output.
+                    man: A command that can be found in most Unix tutorials.
+                    These are some notes on what /bin gives us access to
 */
+
