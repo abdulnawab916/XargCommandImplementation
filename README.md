@@ -1,4 +1,4 @@
-### xargsCommandShell:$ Learning Notes:
+# xargsCommandShell:$ Learning Notes:
 
 
 ### The Java Runtime exec() method
@@ -11,11 +11,11 @@ Under the hood, exec() uses a ProcessBuilder to start the native process.
 
 ## The variants of the exec() command in Java
 - **exec(String command) :*** This variant takes a single string command as input and executes it. For example, you can use it to open a text editor:
-- ```
+
 ```
 Runtime.getRuntime().exec(“notepad.exe”);
 ```
-- ****==exec(String[] cmdarray) :***==* Use this variant to execute a command and its arguments as separate strings in an array. Here’s how you can list files in a directory:
+- ****exec(String[] cmdarray) :**** Use this variant to execute a command and its arguments as separate strings in an array. Here’s how you can list files in a directory:
 ```
 String[] cmd = {"ls", "-l", "/path/to/directory"};
 ```
