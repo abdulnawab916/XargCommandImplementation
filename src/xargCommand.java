@@ -42,6 +42,32 @@ public class xargCommand {
             // Creating an array of tokens.
             String[] arrayOfTokens = command.split(" ");
 
+            // Summary of what I did and what I should do:
+
+
+
+
+
+            // decalre array to store first command
+            ArrayList<String> commandOne = new ArrayList<String>();
+            // counter variable for seeing which index we are on
+            int counter = 0;
+           // keep reading a string and executing the commands until I hit a pipe
+            while (counter < arrayOfTokens.length && !("|".equals(arrayOfTokens[counter]))) {
+                commandOne.add(arrayOfTokens[counter]);
+                counter++;
+            }
+
+
+            // Defining the func. to handle piping
+            public static void pipeHandler() {
+
+
+
+
+
+            }
+
             // try catch for exception if sys call does not work
 
             try {
@@ -57,6 +83,7 @@ public class xargCommand {
                     cat: Reads a file and prints it to the standard output.
                     man: A command that can be found in most Unix tutorials.
               */
+                // The path for accessing the bin variables
                 String[] envp = {"PATH=/bin:/usr/bin"}; //gives us native sys calls
                 Process process1 = Runtime.getRuntime().exec(arrayOfTokens, envp);
 
@@ -99,4 +126,8 @@ Issues/Things Learned:
     - reading it in.
       'BufferedReader stdInput = new BufferedReader(new InputStreamReader(process1.getInputStream()))'
 - Line 13
+- Error was cause of some null pointer type.
+- while the pipe is not a thing
+  while (counter < arrayOfTokens.length && !("|".equals(arrayOfTokens[counter]))) {
+
 */
