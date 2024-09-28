@@ -1,0 +1,21 @@
+Some problems that I am having:
+- How do I parse the commands into their own lists, each time that I encounter a pipe, then I just add to the First element
+- of the nested List, so then this would be like keeping each element relatively good
+- for example, create a nested list, list within a list
+- for each element of the list (which is  a list itself), then I am going to append to that element in the outer list
+- When I encounter the pipe symbol, then I am going to stop appending to the first element, and I will increment the element index
+- of my outer list, and then I will append to that the commands of what comes after the pipe
+
+- This function can be called 'Parser'
+
+Potential Edge Cases:
+- Empty input
+- Single Command
+- Multiple spaces (More than one space)
+- Leading Trail Spaces
+- More than one pipe in a row
+- What if there is a pipe at the start and then at the end
+- Invalid commands that just would not work in general, not a part of /bin
+- Cmmands with no args
+- any type of characters that don't belong
+- 

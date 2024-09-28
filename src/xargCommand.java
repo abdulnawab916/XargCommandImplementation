@@ -44,7 +44,7 @@ public class xargCommand {
             // Handle the case for 'exit' command
             // Gets rid of the shell
             if (command.equalsIgnoreCase("exit")){
-                System.out.println("Exiting xargCommandShell...");
+                System.out.println("Exiting xargCommandShell... Goodbye!");
                 System.exit(0);
             }
             // after error handling, and if user wants to exit,
