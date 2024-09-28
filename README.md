@@ -36,6 +36,13 @@ find /home/marko . -name '*.sh' -type f | xargs rm -f
 What this does, is...
 - The find command finds all the files with the .sh extension, The list of files is piped to xargs, which would then use rm to delete them.
 
-
+#### My Idea for Piping
+- What I plan on doing with piping is to essentially read all of the commands in 
+- until I hit a "|" <Pipe Symbol>
+- And then, after I hit the pipe symbol, I will stop, and run the first command in 
+- a process of it's own and then direct it as input to the second command
+- This will require me to utilize some of Java's file descriptor functionality
+- Link to resource about file descriptors in Java:
+-  https://www.geeksforgeeks.org/java-io-filedescriptor-java/
 
 https://kohlschutter.github.io/junixsocket/filedescriptors.html#:~:text=File%20descriptors%20are%20identifiers%20(handles,sockets%2C%20pipes%20or%20other%20resources.&text=providing%20a%20sophisticated%20casting%20mechanism,Redirect%20.
