@@ -1,3 +1,6 @@
+// Abdul's mini-shell project
+// Implement the 'xargs' command
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
